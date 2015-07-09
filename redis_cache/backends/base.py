@@ -1,8 +1,6 @@
 from django.core.cache.backends.base import BaseCache, InvalidCacheBackendError
 from django.core.exceptions import ImproperlyConfigured
-from django.utils import importlib
-from django.utils.functional import cached_property
-from django.utils.importlib import import_module
+import importlib
 
 from redis_cache.compat import bytes_type, smart_bytes, DEFAULT_TIMEOUT
 
@@ -122,7 +120,7 @@ class BaseRedisCache(BaseCache):
     def get_connection_pool_class(self):
         pool_class = self.options.get('CONNECTION_POOL_CLASS', 'redis.ConnectionPool')
         module_name, class_name = pool_class.rsplit('.', 1)
-        module = import_module(module_name)
+        module = importlib.import_module(module_name)
         try:
             return getattr(module, class_name)
         except AttributeError:
