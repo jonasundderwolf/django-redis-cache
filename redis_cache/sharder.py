@@ -4,7 +4,7 @@ from math import log
 import sys
 
 
-DIGITS = int(log(sys.maxint) / log(16))
+DIGITS = int(log(sys.maxsize) / log(16))
 
 
 def make_hash(s):
