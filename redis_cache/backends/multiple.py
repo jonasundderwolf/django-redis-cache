@@ -18,7 +18,7 @@ class ShardedRedisCache(BaseRedisCache):
             self.clients[client.connection_pool.connection_identifier] = client
             self.sharder.add(client.connection_pool.connection_identifier)
 
-        self.client_list = self.clients.values()
+        self.client_list = list(self.clients.values())
 
 
     def get_client(self, key, write=False):
